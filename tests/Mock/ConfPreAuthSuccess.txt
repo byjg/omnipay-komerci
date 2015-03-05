@@ -1,0 +1,17 @@
+HTTP/1.1 200 OK
+Connection: close
+Date: Sat, 16 Feb 2013 04:22:58 GMT
+Server: Microsoft-IIS/6.0
+X-Powered-By: PHP
+Content-Type: text/html
+Content-Length: 638
+Cache-Control: private, must-revalidate, max-age=0
+Expires: Tue, 01 Jan 1980 00:00:00 GMT
+
+<?xml version="1.0" encoding="utf-8"?>
+<CONFIRMATION>
+<root>
+<codret>0</codret>
+<msgret>Sucesso</msgret>
+</root>
+</CONFIRMATION>

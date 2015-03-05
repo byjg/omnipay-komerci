@@ -1,0 +1,19 @@
+{
+    "name": "byjg/omnipay-komerci",
+    "description": "It is brazilian solution to accept payments with MasterCard, Visa and Diners Club International credit cards on the Internet",
+    "authors": [
+        {
+            "name": "jg",
+            "email": "joao@byjg.com.br"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "Omnipay\\Komerci\\" : "src/" }
+    },
+    "require": {
+        "omnipay/common": "~2.0"
+    },
+    "require-dev": {
+        "omnipay/tests": "~2.0"
+    }
+}
