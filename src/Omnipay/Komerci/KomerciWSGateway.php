@@ -109,7 +109,7 @@ class KomerciWSGateway extends AbstractGateway
 
 	public function purchase(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Komerci\Message\WSAuthorizeRequest', $parameters);
+        return $this->createRequest('\Omnipay\Komerci\Message\WSPurchaseRequest', $parameters);
     }
 
 }
