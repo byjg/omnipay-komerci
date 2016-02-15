@@ -7,19 +7,19 @@ namespace Omnipay\Komerci\Message;
  */
 class WSPurchaseRequest extends WSAuthorizeRequest
 {
+
     public function getData()
     {
-		$data = parent::getData();
-		$data['Transacao'] = $this->getTransacao();
-		$data['Parcelas'] = $this->getParcelas();
+        $data = parent::getData();
+        $data['Transacao'] = $this->getTransacao();
+        $data['Parcelas'] = $this->getParcelas();
 
         return $data;
     }
 
     public function sendData($data)
     {
-		$httpResponse = $this->prepareSendData($data);
+        $httpResponse = $this->prepareSendData($data);
         return $this->response = new WSAuthorizeResponse($this, $httpResponse->xml());
     }
-
 }

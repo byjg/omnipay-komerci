@@ -15,101 +15,100 @@ use Omnipay\Common\AbstractGateway;
 class KomerciWSGateway extends AbstractGateway
 {
 
-	public function getName()
-	{
-		return 'Rede Komerci WebService';
-	}
+    public function getName()
+    {
+        return 'Rede Komerci WebService';
+    }
 
-	public function getShortName()
-	{
-		return 'komerciws';
-	}
-	
-	public function getDefaultParameters()
-	{
-		return array(
-			'filiacao' => '',
-			'transacao' => '04', // 04 - À vista, 06 - Parcelado Emissor, 08 - Parcelo Estabelecimento
-			'parcelas' => '00',  // 00 - À vista, 02 --> 09
-			'username' => '',
-			'password' => '',
-			'testMode' => false
-		);
-	}
+    public function getShortName()
+    {
+        return 'komerciws';
+    }
 
-	public function getFiliacao()
-	{
-		return $this->getParameter('filiacao');
-	}
+    public function getDefaultParameters()
+    {
+        return array(
+            'filiacao' => '',
+            'transacao' => '04', // 04 - À vista, 06 - Parcelado Emissor, 08 - Parcelo Estabelecimento
+            'parcelas' => '00', // 00 - À vista, 02 --> 09
+            'username' => '',
+            'password' => '',
+            'testMode' => false
+        );
+    }
 
-	public function setFiliacao($value)
-	{
-		return $this->setParameter('filiacao', $value);
-	}
+    public function getFiliacao()
+    {
+        return $this->getParameter('filiacao');
+    }
 
-	public function getTransacao()
-	{
-		return $this->getParameter('transacao');
-	}
+    public function setFiliacao($value)
+    {
+        return $this->setParameter('filiacao', $value);
+    }
 
-	public function setTransacao($value)
-	{
-		return $this->setParameter('transacao', $value);
-	}
+    public function getTransacao()
+    {
+        return $this->getParameter('transacao');
+    }
 
-	public function getParcelas()
-	{
-		return $this->getParameter('parcelas');
-	}
+    public function setTransacao($value)
+    {
+        return $this->setParameter('transacao', $value);
+    }
 
-	public function setParcelas($value)
-	{
-		return $this->setParameter('parcelas', $value);
-	}
+    public function getParcelas()
+    {
+        return $this->getParameter('parcelas');
+    }
 
-	public function getTestMode()
-	{
-		return $this->getParameter('testMode');
-	}
+    public function setParcelas($value)
+    {
+        return $this->setParameter('parcelas', $value);
+    }
 
-	public function setTestMode($value)
-	{
-		return $this->setParameter('testMode', $value);
-	}
+    public function getTestMode()
+    {
+        return $this->getParameter('testMode');
+    }
 
-	public function getUsername()
-	{
-		return $this->getParameter('username');
-	}
+    public function setTestMode($value)
+    {
+        return $this->setParameter('testMode', $value);
+    }
 
-	public function setUsername($value)
-	{
-		return $this->setParameter('username', $value);
-	}
+    public function getUsername()
+    {
+        return $this->getParameter('username');
+    }
 
-	public function getPassword()
-	{
-		return $this->getParameter('password');
-	}
+    public function setUsername($value)
+    {
+        return $this->setParameter('username', $value);
+    }
 
-	public function setPassword($value)
-	{
-		return $this->setParameter('password', $value);
-	}
+    public function getPassword()
+    {
+        return $this->getParameter('password');
+    }
 
-	public function authorize(array $parameters = array())
+    public function setPassword($value)
+    {
+        return $this->setParameter('password', $value);
+    }
+
+    public function authorize(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\Komerci\Message\WSAuthorizeRequest', $parameters);
     }
 
-	public function capture(array $parameters = array())
+    public function capture(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\Komerci\Message\WSConfPreAuthRequest', $parameters);
     }
 
-	public function purchase(array $parameters = array())
+    public function purchase(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\Komerci\Message\WSPurchaseRequest', $parameters);
     }
-
 }
