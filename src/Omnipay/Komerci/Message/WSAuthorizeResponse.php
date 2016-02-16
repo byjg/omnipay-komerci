@@ -68,9 +68,9 @@ class WSAuthorizeResponse extends AbstractResponse
 
     public function getOrigemBin()
     {
-        if (!isset($this->data['ORIGEM_BIN'])) {
-            $this->data['ORIGEM_BIN'] = '';
-        } elseif ($this->data['ORIGEM_BIN'] == 'BR') {
+        $this->data['ORIGEM_BIN'] = '';
+
+        if (isset($this->data['ORIGEM_BIN']) && $this->data['ORIGEM_BIN'] == 'BR') {
             $this->data['ORIGEM_BIN'] = 'BRA';
         }
         return $this->data['ORIGEM_BIN'];
