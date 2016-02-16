@@ -12,7 +12,7 @@ use Omnipay\Common\AbstractGateway;
  * @link https://www.userede.com.br/
  * @link http://www.omnipay.com.br/gateways/komerci
  */
-class KomerciWSGateway extends AbstractGateway
+class Gateway extends AbstractGateway
 {
 
     public function getName()
@@ -22,7 +22,7 @@ class KomerciWSGateway extends AbstractGateway
 
     public function getShortName()
     {
-        return 'komerciws';
+        return 'komerci';
     }
 
     public function getDefaultParameters()
