@@ -77,7 +77,7 @@ class WSAuthorizeRequest extends WSAbstractRequest
             'Pax3' => '',
             'Pax4' => '',
             'ConfTxn' => 'S',
-            'Add_Data' => ''
+            'AddData' => ''
         );
 
         return $data;
