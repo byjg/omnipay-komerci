@@ -125,6 +125,38 @@ class KomerciWSGatewayTest extends GatewayTestCase
         $this->assertSame('Sucesso', $response->getMessage());
     }
 
+    public function testCaptureSuccess_Installments()
+    {
+        // Confirm Pre-Auth
+        $this->setMockHttpResponse('ConfPreAuthSuccess.txt');
+
+        $this->captureOptions['installments'] = 2;
+        
+        $request = $this->gateway->capture($this->captureOptions);
+        $requestData = $request->getData();
+        /** @var $card CreditCard */
+        $card = $request->getCard();
+
+        $response = $request->send();
+
+        // Validate Request
+        $this->assertSame('1234567890', $requestData['Filiacao']);
+        $this->assertEmpty($requestData['Distribuidor']);
+        $this->assertSame('95.63', $requestData['Total']);
+        $this->assertSame('02', $requestData['Parcelas']);
+        $this->assertSame('0123456', $requestData['NumCv']);
+        $this->assertSame('7890123', $requestData['NumAutor']);
+        $this->assertEmpty($requestData['Concentrador']);
+        $this->assertSame('user', $requestData['Usr']);
+        $this->assertSame('pass', $requestData['Pwd']);
+
+        // Validate Response
+        $this->assertTrue($response->isSuccessful());
+        $this->assertSame('0', $response->getCode());
+        $this->assertEmpty($response->getTransactionReference());
+        $this->assertSame('Sucesso', $response->getMessage());
+    }
+
     public function testCaptureFailure()
     {
         $this->setMockHttpResponse('ConfPreAuthFailure.txt');
@@ -180,4 +212,52 @@ class KomerciWSGatewayTest extends GatewayTestCase
         $this->assertSame('123409876', $response->getTransactionReference());
         $this->assertSame('CONFIRMAÇÃO COM SUCESSO', $response->getMessage());
     }
+
+    public function testPurchaseSuccess_Installments()
+    {
+        $this->setMockHttpResponse('AuthorizeSuccess.txt');
+
+        $this->purchaseOptions['installments'] = 2;
+
+        $request = $this->gateway->purchase($this->purchaseOptions);
+        $requestData = $request->getData();
+        /** @var $card CreditCard */
+        $card = $request->getCard();
+
+        $response = $request->send();
+
+        // Validate Request
+        $this->assertSame('95.63', $requestData['Total']);
+        $this->assertSame('08', $requestData['Transacao']);
+        $this->assertSame('02', $requestData['Parcelas']);
+        $this->assertSame('1234567890', $requestData['Filiacao']);
+        $this->assertSame('9966441', $requestData['NumPedido']);
+        $this->assertSame($this->purchaseOptions['card']->getNumber(), $requestData['Nrcartao']);
+        $this->assertSame($this->purchaseOptions['card']->getCvv(), $requestData['CVC2']);
+        $this->assertSame($this->purchaseOptions['card']->getExpiryMonth(), $requestData['Mes']);
+        $this->assertSame($this->purchaseOptions['card']->getExpiryYear(), $requestData['Ano']);
+        $this->assertSame($this->purchaseOptions['card']->getName(), $requestData['Portador']);
+        $this->assertEmpty($requestData['IATA']);
+        $this->assertEmpty($requestData['Distribuidor']);
+        $this->assertEmpty($requestData['Concentrador']);
+        $this->assertEmpty($requestData['TaxaEmbarque']);
+        $this->assertEmpty($requestData['Entrada']);
+        $this->assertEmpty($requestData['Numdoc1']);
+        $this->assertEmpty($requestData['Numdoc2']);
+        $this->assertEmpty($requestData['Numdoc3']);
+        $this->assertEmpty($requestData['Numdoc4']);
+        $this->assertEmpty($requestData['Pax1']);
+        $this->assertEmpty($requestData['Pax2']);
+        $this->assertEmpty($requestData['Pax3']);
+        $this->assertEmpty($requestData['Pax4']);
+        $this->assertSame('S', $requestData['ConfTxn']);
+        $this->assertEmpty($requestData['Add_Data']);
+
+        // Validate Response
+        $this->assertTrue($response->isSuccessful());
+        $this->assertSame('0', $response->getCode());
+        $this->assertSame('123409876', $response->getTransactionReference());
+        $this->assertSame('CONFIRMAÇÃO COM SUCESSO', $response->getMessage());
+    }
+
 }
