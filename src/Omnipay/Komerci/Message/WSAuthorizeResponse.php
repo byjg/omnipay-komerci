@@ -23,7 +23,7 @@ class WSAuthorizeResponse extends AbstractResponse
 
     public function isSuccessful()
     {
-        return ($this->getCode() == '0') && ($this->getNumCV() != '') && ($this->getConfCodRet() == '0');
+        return ($this->getCode() == '0') && ($this->getTransactionReference() != '') && ($this->getConfCodRet() == '0');
     }
 
     public function getCode()
@@ -45,17 +45,12 @@ class WSAuthorizeResponse extends AbstractResponse
 
     public function getTransactionReference()
     {
-        return $this->getNumCV();
+        return isset($this->data['NUMCV']) ? $this->data['NUMCV'] : '';
     }
 
     public function getNumAutor()
     {
         return isset($this->data['NUMAUTOR']) ? $this->data['NUMAUTOR'] : '';
-    }
-
-    public function getNumCV()
-    {
-        return isset($this->data['NUMCV']) ? $this->data['NUMCV'] : '';
     }
 
     public function getNumPedido()

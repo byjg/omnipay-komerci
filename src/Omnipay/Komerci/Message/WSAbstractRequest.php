@@ -79,14 +79,14 @@ abstract class WSAbstractRequest extends AbstractRequest
         return $this->setParameter('password', $value);
     }
 
-    public function getNumCv()
+    public function getTransactionReference()
     {
-        return $this->getParameter('numcv');
+        return $this->getParameter('transactionReference');
     }
 
-    public function setNumCv($value)
+    public function setTransactionReference($value)
     {
-        return $this->setParameter('numcv', $value);
+        return $this->setParameter('transactionReference', $value);
     }
 
     public function getNumAutor()

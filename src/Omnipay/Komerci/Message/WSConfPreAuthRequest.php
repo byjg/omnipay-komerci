@@ -12,7 +12,7 @@ class WSConfPreAuthRequest extends WSAbstractRequest
 
     public function getData()
     {
-        $this->validate('apikey', 'amount', 'numcv', 'numautor');
+        $this->validate('apikey', 'amount', 'transactionReference', 'numautor');
 
         /*
           card
@@ -60,7 +60,7 @@ class WSConfPreAuthRequest extends WSAbstractRequest
             'Parcelas' => $this->getFormattedInstallments(),
             'Data' => date('%Y%m%d'),
             'NumAutor' => $this->getNumAutor(),
-            'NumCv' => $this->getNumCv(),
+            'NumCv' => $this->getTransactionReference(),
             'Concentrador' => '',
             'Usr' => $this->getUsername(),
             'Pwd' => $this->getPassword()

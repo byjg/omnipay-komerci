@@ -25,7 +25,7 @@ class KomerciWSGatewayTest extends GatewayTestCase
         $this->captureOptions = array(
             'amount' => 95.63,
             'apikey' => '1234567890',
-            'numcv' => '0123456',
+            'transactionReference' => '0123456',
             'numautor' => '7890123',
             'username' => 'user',
             'password' => 'pass'
