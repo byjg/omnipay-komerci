@@ -22,49 +22,27 @@ class Gateway extends AbstractGateway
 
     public function getShortName()
     {
-        return 'komerci';
+        return 'Komerci';
     }
 
     public function getDefaultParameters()
     {
         return array(
-            'filiacao' => '',
-            'transacao' => '04', // 04 - À vista, 06 - Parcelado Emissor, 08 - Parcelo Estabelecimento
-            'parcelas' => '00', // 00 - À vista, 02 --> 09
+            'apikey' => '',
             'username' => '',
             'password' => '',
             'testMode' => false
         );
     }
 
-    public function getFiliacao()
+    public function getApiKey()
     {
-        return $this->getParameter('filiacao');
+        return $this->getParameter('apikey');
     }
 
-    public function setFiliacao($value)
+    public function setApiKey($value)
     {
-        return $this->setParameter('filiacao', $value);
-    }
-
-    public function getTransacao()
-    {
-        return $this->getParameter('transacao');
-    }
-
-    public function setTransacao($value)
-    {
-        return $this->setParameter('transacao', $value);
-    }
-
-    public function getParcelas()
-    {
-        return $this->getParameter('parcelas');
-    }
-
-    public function setParcelas($value)
-    {
-        return $this->setParameter('parcelas', $value);
+        return $this->setParameter('apikey', $value);
     }
 
     public function getTestMode()
@@ -74,6 +52,10 @@ class Gateway extends AbstractGateway
 
     public function setTestMode($value)
     {
+        if ($value) {
+            $this->setUsername('testews');
+            $this->setPassword('testews');
+        }
         return $this->setParameter('testMode', $value);
     }
 

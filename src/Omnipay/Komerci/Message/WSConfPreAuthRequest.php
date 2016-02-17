@@ -12,7 +12,7 @@ class WSConfPreAuthRequest extends WSAbstractRequest
 
     public function getData()
     {
-        $this->validate('amount', 'filiacao', 'numcv', 'numautor', 'parcelas');
+        $this->validate('apikey', 'amount', 'numcv', 'numautor');
 
         /*
           card
@@ -52,11 +52,12 @@ class WSConfPreAuthRequest extends WSAbstractRequest
           'company',
           'email'
          */
+
         $data = array(
-            'Filiacao' => $this->getFiliacao(),
+            'Filiacao' => $this->getApiKey(),
             'Distribuidor' => '',
             'Total' => sprintf("%.2F", round($this->getAmount() * 100) / 100),
-            'Parcelas' => $this->getParcelas(),
+            'Parcelas' => $this->getFormattedInstallments(),
             'Data' => date('%Y%m%d'),
             'NumAutor' => $this->getNumAutor(),
             'NumCv' => $this->getNumCv(),

@@ -11,8 +11,8 @@ class WSPurchaseRequest extends WSAuthorizeRequest
     public function getData()
     {
         $data = parent::getData();
-        $data['Transacao'] = $this->getTransacao();
-        $data['Parcelas'] = $this->getParcelas();
+        $data['Transacao'] = $this->getInstallments() > 1 ? '08' : '04';  // Note: 04 - à vista; 08 - parcelado estabelecimento; 06 - Parcelado emissor
+        $data['Parcelas'] = $this->getFormattedInstallments();
 
         return $data;
     }

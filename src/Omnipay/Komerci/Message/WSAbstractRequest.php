@@ -19,34 +19,34 @@ abstract class WSAbstractRequest extends AbstractRequest
         return $this->getTestMode() ? $this->endpointTest . $this->method . "Tst" : $this->endpoint . $this->method;
     }
 
-    public function getFiliacao()
+    public function getApiKey()
     {
-        return $this->getParameter('filiacao');
+        return $this->getParameter('apikey');
     }
 
-    public function setFiliacao($value)
+    public function setApiKey($value)
     {
-        return $this->setParameter('filiacao', $value);
+        return $this->setParameter('apikey', $value);
     }
 
-    public function getParcelas()
+    public function getInstallments()
     {
-        return $this->getParameter('parcelas');
+        return $this->getParameter('installments');
     }
 
-    public function setParcelas($value)
+    public function setInstallments($value)
     {
-        return $this->setParameter('parcelas', $value);
+        return $this->setParameter('installments', $value);
     }
 
-    public function getTransacao()
+    protected function getFormattedInstallments()
     {
-        return $this->getParameter('transacao');
-    }
+        $installments = '00';
+        if ($this->getInstallments() > 1) {
+            $installments = sprintf('%02d', $this->getInstallments());
+        }
 
-    public function setTransacao($value)
-    {
-        return $this->setParameter('transacao', $value);
+        return $installments;
     }
 
     public function getTestMode()
@@ -106,14 +106,23 @@ abstract class WSAbstractRequest extends AbstractRequest
      */
     protected function prepareSendData($data)
     {
-        if ($this->getTestMode() || (is_array($data) && isset($data["testMode"]) && $data["testMode"])) {
-            if (!is_array($data)) {
-                $data = array();
-            }
+        if (!is_array($data)) {
+            $data = array();
+        }
+
+        if ($this->getTestMode() || (isset($data["testMode"]) && $data["testMode"])) {
             $data['username'] = 'testews';
             $data['password'] = 'testews';
+            unset($data['testMode']);
         }
-        $httpResponse = $this->httpClient->post($this->getEndpoint(), null, $data)->send();
+
+        $request = $this->httpClient->post($this->getEndpoint());
+        $request->setHeader('Content-Type', 'application/x-www-form-urlencoded');
+        $request->setHeader('Accept', '*/*');
+        $request->setBody(http_build_query($data));
+        $request->setHeader('User-Agent', 'Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)');
+
+        $httpResponse = $request->send();
 
         return $httpResponse;
     }

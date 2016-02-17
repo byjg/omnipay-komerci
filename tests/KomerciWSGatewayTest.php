@@ -18,13 +18,13 @@ class KomerciWSGatewayTest extends GatewayTestCase
         $this->purchaseOptions = array(
             'amount' => 95.63,
             'card' => $card,
-            'filiacao' => '1234567890',
+            'apikey' => '1234567890',
             'transactionId' => '9966441'
         );
 
         $this->captureOptions = array(
             'amount' => 95.63,
-            'filiacao' => '1234567890',
+            'apikey' => '1234567890',
             'numcv' => '0123456',
             'numautor' => '7890123',
             'username' => 'user',

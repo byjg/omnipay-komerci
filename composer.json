@@ -1,6 +1,6 @@
 {
     "name": "byjg/omnipay-komerci",
-    "description": "It is brazilian solution to accept payments with MasterCard, Visa and Diners Club International credit cards on the Internet",
+    "description": "Komerci is brazilian acquirer solution provided by Rede (former RedeCard) that accept payments with MasterCard, Visa and Diners Club International credit cards on the Internet",
     "authors": [
         {
             "name": "jg",

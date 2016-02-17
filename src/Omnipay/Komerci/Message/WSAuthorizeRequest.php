@@ -12,7 +12,7 @@ class WSAuthorizeRequest extends WSAbstractRequest
 
     public function getData()
     {
-        $this->validate('amount', 'filiacao', 'transacao', 'parcelas', 'card');
+        $this->validate('amount', 'apikey', 'card');
 
         /*
           card
@@ -56,7 +56,7 @@ class WSAuthorizeRequest extends WSAbstractRequest
             'Total' => sprintf("%.2F", round($this->getAmount() * 100) / 100),
             'Transacao' => '73', // 2-step authorization;
             'Parcelas' => '', // Only in the step Confirmation
-            'Filiacao' => $this->getFiliacao(),
+            'Filiacao' => $this->getApiKey(),
             'NumPedido' => $this->getTransactionId(),
             'Nrcartao' => $this->getCard()->getNumber(),
             'CVC2' => $this->getCard()->getCvv(),
