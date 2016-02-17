@@ -75,13 +75,13 @@ class KomerciWSGatewayTest extends GatewayTestCase
         $this->assertEmpty($requestData['Pax3']);
         $this->assertEmpty($requestData['Pax4']);
         $this->assertSame('S', $requestData['ConfTxn']);
-        $this->assertEmpty($requestData['Add_Data']);
+        $this->assertEmpty($requestData['AddData']);
 
         // Validate Response
         $this->assertTrue($response->isSuccessful());
         $this->assertSame('0', $response->getCode());
         $this->assertSame('123409876', $response->getTransactionReference());
-        $this->assertSame('CONFIRMAÇÃO COM SUCESSO', $response->getMessage());
+        $this->assertSame('Autorizado com sucesso', $response->getMessage());
     }
 
     public function testAuthorizeFailure()
@@ -93,6 +93,16 @@ class KomerciWSGatewayTest extends GatewayTestCase
         $this->assertFalse($response->isSuccessful());
         $this->assertEmpty($response->getTransactionReference());
         $this->assertSame('TRANSAÇÃO NEGADA', $response->getMessage());
+    }
+
+    public function testAuthorizeFailure_2ndFormat()
+    {
+        $this->setMockHttpResponse('AuthorizeFailure2.txt');
+
+        $response = $this->gateway->authorize($this->purchaseOptions)->send();
+
+        $this->assertFalse($response->isSuccessful());
+        $this->assertSame('TRANSACAO JA CONFIRMADA', $response->getMessage());
     }
 
     public function testCaptureSuccess()
@@ -204,13 +214,13 @@ class KomerciWSGatewayTest extends GatewayTestCase
         $this->assertEmpty($requestData['Pax3']);
         $this->assertEmpty($requestData['Pax4']);
         $this->assertSame('S', $requestData['ConfTxn']);
-        $this->assertEmpty($requestData['Add_Data']);
+        $this->assertEmpty($requestData['AddData']);
 
         // Validate Response
         $this->assertTrue($response->isSuccessful());
         $this->assertSame('0', $response->getCode());
         $this->assertSame('123409876', $response->getTransactionReference());
-        $this->assertSame('CONFIRMAÇÃO COM SUCESSO', $response->getMessage());
+        $this->assertSame('Autorizado com sucesso', $response->getMessage());
     }
 
     public function testPurchaseSuccess_Installments()
@@ -251,13 +261,13 @@ class KomerciWSGatewayTest extends GatewayTestCase
         $this->assertEmpty($requestData['Pax3']);
         $this->assertEmpty($requestData['Pax4']);
         $this->assertSame('S', $requestData['ConfTxn']);
-        $this->assertEmpty($requestData['Add_Data']);
+        $this->assertEmpty($requestData['AddData']);
 
         // Validate Response
         $this->assertTrue($response->isSuccessful());
         $this->assertSame('0', $response->getCode());
         $this->assertSame('123409876', $response->getTransactionReference());
-        $this->assertSame('CONFIRMAÇÃO COM SUCESSO', $response->getMessage());
+        $this->assertSame('Autorizado com sucesso', $response->getMessage());
     }
 
 }

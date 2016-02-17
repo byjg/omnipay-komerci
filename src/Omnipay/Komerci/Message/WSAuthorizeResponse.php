@@ -23,7 +23,7 @@ class WSAuthorizeResponse extends AbstractResponse
 
     public function isSuccessful()
     {
-        return ($this->getCode() == '0') && ($this->getNumCV() != '');
+        return ($this->getCode() == '0') && ($this->getNumCV() != '') && ($this->getConfCodRet() == '0');
     }
 
     public function getCode()
@@ -33,7 +33,10 @@ class WSAuthorizeResponse extends AbstractResponse
 
     public function getMessage()
     {
-        return isset($this->data['MSGRET']) ? $this->data['MSGRET'] : 'Unknown';
+        if ($this->getConfCodRet()) {
+            return $this->getConfMsgRet();
+        }
+        return isset($this->data['MSGRET']) ? $this->data['MSGRET'] : '';
     }
 
     public function getTransactionReference()
