@@ -8,8 +8,6 @@ namespace Omnipay\Komerci\Message;
 class WSAuthorizeRequest extends WSAbstractRequest
 {
 
-    protected $method = 'GetAuthorized';
-
     public function getData()
     {
         $this->validate('amount', 'apikey', 'card');
@@ -91,7 +89,7 @@ class WSAuthorizeRequest extends WSAbstractRequest
 
     public function sendData($data)
     {
-        $httpResponse = $this->prepareSendData($data);
+        $httpResponse = $this->prepareSendData($data, 'GetAuthorized');
         return $this->response = new WSAuthorizeResponse($this, $httpResponse->xml());
     }
 }

@@ -93,4 +93,10 @@ class Gateway extends AbstractGateway
     {
         return $this->createRequest('\Omnipay\Komerci\Message\WSPurchaseRequest', $parameters);
     }
+
+    public function void(array $parameters = array())
+    {
+        return $this->createRequest('\Omnipay\Komerci\Message\WSVoidRequest', $parameters);
+    }
+
 }

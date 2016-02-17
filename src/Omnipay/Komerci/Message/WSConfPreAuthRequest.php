@@ -8,11 +8,9 @@ namespace Omnipay\Komerci\Message;
 class WSConfPreAuthRequest extends WSAbstractRequest
 {
 
-    protected $method = 'ConfPreAuthorization';
-
     public function getData()
     {
-        $this->validate('apikey', 'amount', 'transactionReference', 'numautor');
+        $this->validate('apikey', 'amount', 'transactionReference', 'numautor', 'username', 'password');
 
         /*
           card
@@ -71,7 +69,7 @@ class WSConfPreAuthRequest extends WSAbstractRequest
 
     public function sendData($data)
     {
-        $httpResponse = $this->prepareSendData($data);
+        $httpResponse = $this->prepareSendData($data, 'ConfPreAuthorization');
         return $this->response = new WSConfPreAuthResponse($this, $httpResponse->xml());
     }
 }

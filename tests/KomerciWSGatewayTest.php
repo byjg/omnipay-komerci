@@ -35,10 +35,12 @@ class KomerciWSGatewayTest extends GatewayTestCase
         );
 
         $this->voidOptions = array(
-            'accountNumber' => '12345678',
-            'storeId' => 'test',
-            'storePassword' => 'test',
-            'transactionReference' => '115147689',
+            'apikey' => '1234567890',
+            'amount' => 95.63,
+            'transactionReference' => '0123456',
+            'numautor' => '7890123',
+            'username' => 'user',
+            'password' => 'pass'
         );
     }
 
@@ -291,6 +293,31 @@ class KomerciWSGatewayTest extends GatewayTestCase
 
         $this->assertSame('testews', $requestData['Usr']);
         $this->assertSame('testews', $requestData['Pwd']);
+    }
+
+    public function testVoidSuccess()
+    {
+        $this->setMockHttpResponse('VoidSuccess.txt');
+
+        $request = $this->gateway->void($this->voidOptions);
+        $requestData = $request->getData();
+
+        $response = $request->send();
+
+
+
+        // Validate Request
+        $this->assertSame('95.63', $requestData['Total']);
+        $this->assertSame('1234567890', $requestData['Filiacao']);
+        $this->assertSame('0123456', $requestData['NumCV']);
+        $this->assertSame('7890123', $requestData['NumAutor']);
+        $this->assertSame('user', $requestData['Usr']);
+        $this->assertSame('pass', $requestData['Pwd']);
+
+        // Validate Response
+        $this->assertTrue($response->isSuccessful());
+        $this->assertSame('0', $response->getCode());
+        $this->assertSame('F REDECARD @@ MASTERCARD @ ESTORNO @@COMPR:000200056 VALOR: 0,01@ESTORNO:003200039 @@ESTAB:999999999 TESTE KOMERCI @28.03.03-11:47:10 TERM:PV9999999/004515@CARTAO: 9999.99**.****.9999 @AUTORIZACAO: 007725 @@', $response->getMessage());
     }
 
 }

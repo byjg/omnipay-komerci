@@ -19,7 +19,7 @@ class WSPurchaseRequest extends WSAuthorizeRequest
 
     public function sendData($data)
     {
-        $httpResponse = $this->prepareSendData($data);
+        $httpResponse = $this->prepareSendData($data, 'GetAuthorized');
         return $this->response = new WSAuthorizeResponse($this, $httpResponse->xml());
     }
 }
