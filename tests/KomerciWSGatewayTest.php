@@ -309,7 +309,7 @@ class KomerciWSGatewayTest extends GatewayTestCase
         // Validate Request
         $this->assertSame('95.63', $requestData['Total']);
         $this->assertSame('1234567890', $requestData['Filiacao']);
-        $this->assertSame('0123456', $requestData['NumCV']);
+        $this->assertSame('0123456', $requestData['NumCv']);
         $this->assertSame('7890123', $requestData['NumAutor']);
         $this->assertSame('user', $requestData['Usr']);
         $this->assertSame('pass', $requestData['Pwd']);
