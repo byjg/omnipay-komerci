@@ -116,11 +116,20 @@ abstract class WSAbstractRequest extends AbstractRequest
             unset($data['testMode']);
         }
 
+        // First Try
+        //$httpResponse = $this->httpClient->post($this->getEndpoint(), null, $data)->send();
+
+        // Second Try
         $request = $this->httpClient->post($this->getEndpoint());
         $request->setHeader('Content-Type', 'application/x-www-form-urlencoded');
         $request->setHeader('Accept', '*/*');
         $request->setBody(http_build_query($data));
         $request->setHeader('User-Agent', 'Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)');
+
+
+        // Third Try
+        $request = new \ByJG\Util\WebRequest($this->getEndpoint());
+        print_r($request->post($data));
 
         $httpResponse = $request->send();
 
