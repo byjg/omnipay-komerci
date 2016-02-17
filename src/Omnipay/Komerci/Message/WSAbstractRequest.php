@@ -61,6 +61,9 @@ abstract class WSAbstractRequest extends AbstractRequest
 
     public function getUsername()
     {
+        if ($this->getTestMode()) {
+            return 'testews';
+        }
         return $this->getParameter('username');
     }
 
@@ -71,6 +74,9 @@ abstract class WSAbstractRequest extends AbstractRequest
 
     public function getPassword()
     {
+        if ($this->getTestMode()) {
+            return 'testews';
+        }
         return $this->getParameter('password');
     }
 
@@ -108,12 +114,6 @@ abstract class WSAbstractRequest extends AbstractRequest
     {
         if (!is_array($data)) {
             $data = array();
-        }
-
-        if ($this->getTestMode() || (isset($data["testMode"]) && $data["testMode"])) {
-            $data['username'] = 'testews';
-            $data['password'] = 'testews';
-            unset($data['testMode']);
         }
 
         $httpResponse = $this->httpClient->post($this->getEndpoint(), null, $data)->send();

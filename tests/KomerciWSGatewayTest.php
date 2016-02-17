@@ -6,6 +6,9 @@ use Omnipay\Tests\GatewayTestCase;
 
 class KomerciWSGatewayTest extends GatewayTestCase
 {
+    protected $purchaseOptions = [];
+    protected $captureOptions = [];
+    protected $voidOptions = [];
 
     public function setUp()
     {
@@ -75,7 +78,7 @@ class KomerciWSGatewayTest extends GatewayTestCase
         $this->assertEmpty($requestData['Pax3']);
         $this->assertEmpty($requestData['Pax4']);
         $this->assertSame('S', $requestData['ConfTxn']);
-        $this->assertEmpty($requestData['AddData']);
+        $this->assertEmpty($requestData['Add_Data']);
 
         // Validate Response
         $this->assertTrue($response->isSuccessful());
@@ -214,7 +217,7 @@ class KomerciWSGatewayTest extends GatewayTestCase
         $this->assertEmpty($requestData['Pax3']);
         $this->assertEmpty($requestData['Pax4']);
         $this->assertSame('S', $requestData['ConfTxn']);
-        $this->assertEmpty($requestData['AddData']);
+        $this->assertEmpty($requestData['Add_Data']);
 
         // Validate Response
         $this->assertTrue($response->isSuccessful());
@@ -261,13 +264,33 @@ class KomerciWSGatewayTest extends GatewayTestCase
         $this->assertEmpty($requestData['Pax3']);
         $this->assertEmpty($requestData['Pax4']);
         $this->assertSame('S', $requestData['ConfTxn']);
-        $this->assertEmpty($requestData['AddData']);
+        $this->assertEmpty($requestData['Add_Data']);
 
         // Validate Response
         $this->assertTrue($response->isSuccessful());
         $this->assertSame('0', $response->getCode());
         $this->assertSame('123409876', $response->getTransactionReference());
         $this->assertSame('Autorizado com sucesso', $response->getMessage());
+    }
+
+    public function testCheckTestEnvironment_1()
+    {
+        $this->gateway->setTestMode(true);
+        $request = $this->gateway->authorize($this->purchaseOptions);
+        $requestData = $request->getData();
+
+        $this->assertArrayNotHasKey('Add_Data', $requestData);
+        $this->assertEmpty($requestData['AddData']);
+    }
+
+    public function testCheckTestEnvironment_2()
+    {
+        $this->gateway->setTestMode(true);
+        $request = $this->gateway->capture($this->captureOptions);
+        $requestData = $request->getData();
+
+        $this->assertSame('testews', $requestData['Usr']);
+        $this->assertSame('testews', $requestData['Pwd']);
     }
 
 }

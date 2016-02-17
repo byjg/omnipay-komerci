@@ -77,8 +77,14 @@ class WSAuthorizeRequest extends WSAbstractRequest
             'Pax3' => '',
             'Pax4' => '',
             'ConfTxn' => 'S',
-            'AddData' => ''
+            'Add_Data' => ''
         );
+
+        // The test environment uses 'AddData' and the production environment uses 'Add_Data'
+        if ($this->getTestMode()) {
+            unset($data['Add_Data']);
+            $data['AddData'] = '';
+        }
 
         return $data;
     }
