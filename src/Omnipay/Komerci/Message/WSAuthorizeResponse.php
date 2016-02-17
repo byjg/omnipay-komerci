@@ -28,7 +28,11 @@ class WSAuthorizeResponse extends AbstractResponse
 
     public function getCode()
     {
-        return isset($this->data['CODRET']) ? $this->data['CODRET'] : '99';
+        $code = isset($this->data['CODRET']) ? $this->data['CODRET'] : '99';
+        if ($code == '0') {
+            $code = $this->getConfCodRet();
+        }
+        return $code;
     }
 
     public function getMessage()
