@@ -55,7 +55,7 @@ class WSAuthorizeRequest extends WSAbstractRequest
         $data = array(
             'Total' => sprintf("%.2F", round($this->getAmount() * 100) / 100),
             'Transacao' => '73', // 2-step authorization;
-            'Parcelas' => '', // Only in the step Confirmation
+            'Parcelas' => $this->getFormattedInstallments(), // Docs said it needs to be empty but I am getting an error!
             'Filiacao' => $this->getApiKey(),
             'NumPedido' => $this->getTransactionId(),
             'Nrcartao' => $this->getCard()->getNumber(),
