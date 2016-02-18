@@ -70,12 +70,7 @@ class WSAuthorizeResponse extends AbstractResponse
 
     public function getOrigemBin()
     {
-        $this->data['ORIGEM_BIN'] = '';
-
-        if (isset($this->data['ORIGEM_BIN']) && $this->data['ORIGEM_BIN'] == 'BR') {
-            $this->data['ORIGEM_BIN'] = 'BRA';
-        }
-        return $this->data['ORIGEM_BIN'];
+        return isset($this->data['ORIGEM_BIN']) ? $this->data['ORIGEM_BIN'] : '';
     }
 
     public function getConfCodRet()
@@ -87,4 +82,10 @@ class WSAuthorizeResponse extends AbstractResponse
     {
         return isset($this->data['CONFMSGRET']) ? $this->data['CONFMSGRET'] : '';
     }
+
+    public function getValidUntil()
+    {
+        return isset($this->data['DATA_EXPI']) ? substr($this->data['DATA_EXPI'], 0, 4) . '-' . substr($this->data['DATA_EXPI'], 4, 2) . '-' . substr($this->data['DATA_EXPI'], 6)  : '';
+    }
+
 }

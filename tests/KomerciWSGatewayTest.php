@@ -87,6 +87,12 @@ class KomerciWSGatewayTest extends GatewayTestCase
         $this->assertSame('0', $response->getCode());
         $this->assertSame('123409876', $response->getTransactionReference());
         $this->assertSame('Autorizado com sucesso', $response->getMessage());
+        $this->assertSame('012345', $response->getNumAutor());
+        $this->assertSame('1234567', $response->getNumPedido());
+        $this->assertSame('10101010101', $response->getNumSqn());
+        $this->assertSame('023456', $response->getNumAutent());
+        $this->assertSame('BR', $response->getOrigemBin());
+        $this->assertSame('2015-01-26', $response->getValidUntil());
     }
 
     public function testAuthorizeFailure()
