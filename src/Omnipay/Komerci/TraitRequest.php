@@ -84,7 +84,8 @@ trait TraitRequest
     /**
      *
      * @param type $data
-     * @return \Guzzle\Http
+     * @param string $method
+     * @return \Omnipay\Common\Message\RequestInterface
      */
     protected function prepareSendData($data, $method)
     {

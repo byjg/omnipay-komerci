@@ -85,7 +85,7 @@ class WSAuthorizeResponse extends AbstractResponse
 
     public function getValidUntil()
     {
-        return isset($this->data['DATA_EXPI']) ? substr($this->data['DATA_EXPI'], 0, 4) . '-' . substr($this->data['DATA_EXPI'], 4, 2) . '-' . substr($this->data['DATA_EXPI'], 6)  : '';
+        return isset($this->data['DATA_EXPI']) ? substr($this->data['DATA_EXPI'], 0, 4) . '-' . substr($this->data['DATA_EXPI'], 4, 2) . '-' . substr($this->data['DATA_EXPI'], 6) : '';
     }
 
 }
