@@ -127,6 +127,7 @@ class KomerciWSGatewayTest extends GatewayTestCase
         $this->assertEmpty($requestData['Distribuidor']);
         $this->assertSame('95.63', $requestData['Total']);
         $this->assertSame('00', $requestData['Parcelas']);
+        $this->assertSame(date('Ymd'), $requestData['Data']);
         $this->assertSame('0123456', $requestData['NumCv']);
         $this->assertSame('7890123', $requestData['NumAutor']);
         $this->assertEmpty($requestData['Concentrador']);

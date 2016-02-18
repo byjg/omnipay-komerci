@@ -11,7 +11,7 @@ class WSVoidRequest extends \Omnipay\Common\Message\AbstractRequest
 
     public function getData()
     {
-//        $this->validate('apikey', 'amount', 'transactionReference', 'numautor', 'username', 'password');
+        $this->validate('apikey', 'amount', 'transactionReference', 'numautor', 'username', 'password');
 
         $data = array(
             'Total' => sprintf("%.2F", round($this->getAmount() * 100) / 100),
