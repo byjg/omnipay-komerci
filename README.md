@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/byjg/omnipay-komerci.svg?branch=master)](https://travis-ci.org/byjg/omnipay-komerci)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/byjg/omnipay-komerci/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/byjg/omnipay-komerci/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/5814bf37-e3ac-4232-9c5d-fe304a340e83/mini.png)](https://insight.sensiolabs.com/projects/5814bf37-e3ac-4232-9c5d-fe304a340e83)
-[![Latest Stable Version](https://poser.pugx.org/byjg/omnipay-komerci/v/stable)](https://packagist.org/packages/byjg/omnipay-komerci) [![Total Downloads](https://poser.pugx.org/byjg/omnipay-komerci/downloads)](https://packagist.org/packages/byjg/omnipay-komerci) i) [![License](https://poser.pugx.org/byjg/omnipay-komerci/license)](https://packagist.org/packages/byjg/omnipay-komerci)
+[![Latest Stable Version](https://poser.pugx.org/byjg/omnipay-komerci/v/stable)](https://packagist.org/packages/byjg/omnipay-komerci) [![Total Downloads](https://poser.pugx.org/byjg/omnipay-komerci/downloads)](https://packagist.org/packages/byjg/omnipay-komerci) [![License](https://poser.pugx.org/byjg/omnipay-komerci/license)](https://packagist.org/packages/byjg/omnipay-komerci)
 
 **Komerci WebService ([Rede](https://www.userede.com.br)) driver for the Omnipay PHP payment processing library**
 
