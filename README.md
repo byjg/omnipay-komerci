@@ -39,6 +39,8 @@ If your IP is not registered you'll get an error 500.
 // Setup payment gateway
 $gateway = Omnipay::create('Komerci');
 $gateway->setApiKey('00000000');
+$gateway->setUsername('user');
+$gateway->setPassword('pass');
 $gateway->setTestMode(true);
 
 // Example form data
@@ -62,6 +64,12 @@ $response = $gateway->purchase(
 
 For general usage instructions, please see the main [Omnipay](https://github.com/thephpleague/omnipay)
 repository.
+
+Implemented methods
+* authorize
+* capture
+* purchse
+* void
 
 ## Support
 
