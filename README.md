@@ -1,5 +1,9 @@
 # Omnipay: Komerci WebServer ([Rede](https://www.userede.com.br))
 
+[![Build Status](https://travis-ci.org/byjg/omnipay-komerci.svg?branch=master)](https://travis-ci.org/byjg/omnipay-komerci)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/byjg/omnipay-komerci/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/byjg/omnipay-komerci/?branch=master)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/5814bf37-e3ac-4232-9c5d-fe304a340e83/mini.png)](https://insight.sensiolabs.com/projects/5814bf37-e3ac-4232-9c5d-fe304a340e83)
+
 **Komerci WebService ([Rede](https://www.userede.com.br)) driver for the Omnipay PHP payment processing library**
 
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
