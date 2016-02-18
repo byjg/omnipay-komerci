@@ -1,6 +1,6 @@
 # Omnipay: Komerci WebServer ([Rede](https://www.userede.com.br))
 
-**Komerci WebServer (Rede) driver for the Omnipay PHP payment processing library**
+**Komerci WebService ([Rede](https://www.userede.com.br)) driver for the Omnipay PHP payment processing library**
 
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
 processing library for PHP 5.3+. This package implements Dummy support for Omnipay.
