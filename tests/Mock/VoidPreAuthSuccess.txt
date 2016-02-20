@@ -1,0 +1,17 @@
+HTTP/1.1 200 OK
+Connection: close
+Date: Sat, 16 Feb 2013 04:22:58 GMT
+Server: Microsoft-IIS/6.0
+X-Powered-By: PHP
+Content-Type: text/html
+Content-Length: 638
+Cache-Control: private, must-revalidate, max-age=0
+Expires: Tue, 01 Jan 1980 00:00:00 GMT
+
+<?xml version="1.0" encoding="utf-8"?>
+<CONFIRMATION>
+    <root>
+        <CODRET>0</CODRET>
+        <MSGRET>F                 REDE                 @                 VISA                 @ESTORNO DE CONFIRMACAO PRE-AUTORIZ.   @COMPR:987654321                       @ESTAB:999999999 NOME ESTAB            @20.02.16-12:29:47 TERM:RO044243/459147@CODIGO PRE-AUTORIZACAO: 012345        @VALOR PRE-AUTORIZADO  :      1.234,56 @@@CARTAO: xxxxxxxxxxxx9994              @@</MSGRET>
+    </root>
+</CONFIRMATION>

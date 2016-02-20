@@ -38,7 +38,6 @@ class KomerciWSGatewayTest extends GatewayTestCase
             'apikey' => '1234567890',
             'amount' => 95.63,
             'transactionReference' => '0123456',
-            'installments' => '1',
             'numautor' => '7890123',
             'username' => 'user',
             'password' => 'pass'
@@ -325,7 +324,6 @@ class KomerciWSGatewayTest extends GatewayTestCase
         $this->assertSame('7890123', $requestData['NumAutor']);
         $this->assertSame('user', $requestData['Usr']);
         $this->assertSame('pass', $requestData['Pwd']);
-        $this->assertArrayNotHasKey('Parcelas', $requestData);
         $this->assertArrayNotHasKey('Data', $requestData);
 
         // Validate Response
@@ -336,7 +334,7 @@ class KomerciWSGatewayTest extends GatewayTestCase
 
     public function testVoidPreAuthSuccess()
     {
-        $this->setMockHttpResponse('VoidSuccess.txt');
+        $this->setMockHttpResponse('VoidPreAuthSuccess.txt');
 
         $voidOptions = $this->voidOptions;
         $voidOptions['preauth'] = true;
@@ -353,12 +351,11 @@ class KomerciWSGatewayTest extends GatewayTestCase
         $this->assertSame('7890123', $requestData['NumAutor']);
         $this->assertSame('user', $requestData['Usr']);
         $this->assertSame('pass', $requestData['Pwd']);
-        $this->assertSame('00', $requestData['Parcelas']);
         $this->assertSame(date('Ymd'), $requestData['Data']);
 
         // Validate Response
         $this->assertTrue($response->isSuccessful());
         $this->assertSame('0', $response->getCode());
-        $this->assertSame('F REDECARD @@ MASTERCARD @ ESTORNO @@COMPR:000200056 VALOR: 0,01@ESTORNO:003200039 @@ESTAB:999999999 TESTE KOMERCI @28.03.03-11:47:10 TERM:PV9999999/004515@CARTAO: 9999.99**.****.9999 @AUTORIZACAO: 007725 @@', $response->getMessage());
+        $this->assertSame('F                 REDE                 @                 VISA                 @ESTORNO DE CONFIRMACAO PRE-AUTORIZ.   @COMPR:987654321                       @ESTAB:999999999 NOME ESTAB            @20.02.16-12:29:47 TERM:RO044243/459147@CODIGO PRE-AUTORIZACAO: 012345        @VALOR PRE-AUTORIZADO  :      1.234,56 @@@CARTAO: xxxxxxxxxxxx9994              @@', $response->getMessage());
     }
 }

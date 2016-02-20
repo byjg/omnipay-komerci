@@ -21,7 +21,7 @@ class WSVoidRequest extends WSAbstractRequest
     
     public function getData()
     {
-        $this->validate('apikey', 'amount', 'transactionReference', 'numautor', 'username', 'password', 'installments');
+        $this->validate('apikey', 'amount', 'transactionReference', 'numautor', 'username', 'password');
 
         if ($this->getPreAuth()) {
             return $this->getVoidPreAuthData();
@@ -52,7 +52,6 @@ class WSVoidRequest extends WSAbstractRequest
         if ($this->getTestMode()) {
             $data['Distribuidor'] = '';
         }
-        $data['Parcelas'] = $this->getFormattedInstallments();
         $data['Data'] = date('Ymd');
 
         return $data;
@@ -61,7 +60,7 @@ class WSVoidRequest extends WSAbstractRequest
     public function sendData($data)
     {
         if ($this->getPreAuth()) {
-            $httpResponse = $this->prepareSendData($data, 'VoidConfPreAuthorization.');
+            $httpResponse = $this->prepareSendData($data, 'VoidConfPreAuthorization');
         } else {
             $httpResponse = $this->prepareSendData($data, 'VoidTransaction');
         }
