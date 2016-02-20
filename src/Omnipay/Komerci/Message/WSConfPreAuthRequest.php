@@ -12,45 +12,6 @@ class WSConfPreAuthRequest extends WSAbstractRequest
     {
         $this->validate('apikey', 'amount', 'transactionReference', 'numautor', 'username', 'password');
 
-        /*
-          card
-          token
-          amount
-          currency
-          description
-          transactionId
-          clientIp
-          returnUrl
-          cancelUrl
-
-          'firstName',
-          'lastName',
-          'number',
-          'expiryMonth',
-          'expiryYear',
-          'startMonth',
-          'startYear',
-          'cvv',
-          'issueNumber',
-          'type',
-          'billingAddress1',
-          'billingAddress2',
-          'billingCity',
-          'billingPostcode',
-          'billingState',
-          'billingCountry',
-          'billingPhone',
-          'shippingAddress1',
-          'shippingAddress2',
-          'shippingCity',
-          'shippingPostcode',
-          'shippingState',
-          'shippingCountry',
-          'shippingPhone',
-          'company',
-          'email'
-         */
-
         $data = array(
             'Filiacao' => $this->getApiKey(),
             'Distribuidor' => '',

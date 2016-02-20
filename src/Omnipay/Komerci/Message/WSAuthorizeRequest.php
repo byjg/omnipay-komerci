@@ -12,44 +12,6 @@ class WSAuthorizeRequest extends WSAbstractRequest
     {
         $this->validate('amount', 'apikey', 'card');
 
-        /*
-          card
-          token
-          amount
-          currency
-          description
-          transactionId
-          clientIp
-          returnUrl
-          cancelUrl
-
-          'firstName',
-          'lastName',
-          'number',
-          'expiryMonth',
-          'expiryYear',
-          'startMonth',
-          'startYear',
-          'cvv',
-          'issueNumber',
-          'type',
-          'billingAddress1',
-          'billingAddress2',
-          'billingCity',
-          'billingPostcode',
-          'billingState',
-          'billingCountry',
-          'billingPhone',
-          'shippingAddress1',
-          'shippingAddress2',
-          'shippingCity',
-          'shippingPostcode',
-          'shippingState',
-          'shippingCountry',
-          'shippingPhone',
-          'company',
-          'email'
-         */
         $data = array(
             'Total' => sprintf("%.2F", round($this->getAmount() * 100) / 100),
             'Transacao' => '73', // 2-step authorization;

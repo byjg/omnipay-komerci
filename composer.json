@@ -11,6 +11,7 @@
         "psr-0": { "Omnipay\\Komerci\\" : "src/" }
     },
     "require": {
+        "php": ">=5.4.0",
         "omnipay/common": "~2.0"
     },
     "require-dev": {

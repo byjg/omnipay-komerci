@@ -5,14 +5,33 @@ namespace Omnipay\Komerci\Message;
 /**
  * Komerci Authorize Request
  */
-class WSVoidRequest extends \Omnipay\Common\Message\AbstractRequest
+class WSVoidRequest extends WSAbstractRequest
 {
     use \Omnipay\Komerci\TraitRequest;
 
+    public function getPreAuth()
+    {
+        return $this->getParameter('preauth');
+    }
+
+    public function setPreAuth($value)
+    {
+        return $this->setParameter('preauth', $value);
+    }
+    
     public function getData()
     {
-        $this->validate('apikey', 'amount', 'transactionReference', 'numautor', 'username', 'password');
+        $this->validate('apikey', 'amount', 'transactionReference', 'numautor', 'username', 'password', 'installments');
 
+        if ($this->getPreAuth()) {
+            return $this->getVoidPreAuthData();
+        } else {
+            return $this->getVoidPurchaseData();
+        }
+    }
+
+    protected function getVoidPurchaseData()
+    {
         $data = array(
             'Total' => sprintf("%.2F", round($this->getAmount() * 100) / 100),
             'Filiacao' => $this->getApiKey(),
@@ -26,9 +45,26 @@ class WSVoidRequest extends \Omnipay\Common\Message\AbstractRequest
         return $data;
     }
 
+    protected function getVoidPreAuthData()
+    {
+        $data = $this->getVoidPurchaseData();
+
+        if ($this->getTestMode()) {
+            $data['Distribuidor'] = '';
+        }
+        $data['Parcelas'] = $this->getFormattedInstallments();
+        $data['Data'] = date('Ymd');
+
+        return $data;
+    }
+
     public function sendData($data)
     {
-        $httpResponse = $this->prepareSendData($data, 'VoidTransaction');
+        if ($this->getPreAuth()) {
+            $httpResponse = $this->prepareSendData($data, 'VoidConfPreAuthorization.');
+        } else {
+            $httpResponse = $this->prepareSendData($data, 'VoidTransaction');
+        }
         return $this->response = new WSConfPreAuthResponse($this, $httpResponse->xml());
     }
 }
