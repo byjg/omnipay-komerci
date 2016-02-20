@@ -143,8 +143,11 @@ class KomerciWSGatewayTest extends GatewayTestCase
         // Validate Response
         $this->assertTrue($response->isSuccessful());
         $this->assertSame('0', $response->getCode());
-        $this->assertEmpty($response->getTransactionReference());
-        $this->assertSame('Sucesso', $response->getMessage());
+        $this->assertSame('F+++++++++++++++++REDE+++++++++++++++++@++++CONFIRMACAO+DE+PRE-AUTORIZACAO++++@COMPR:987654321++++VALOR:+++++1.234,56@ESTAB:999999999+NOME+ESTAB++++++++++++@20.02.16-08:36:01+TERM:RO999999/999999@AUTORIZACAO+EMISSOR:+012345+++++++++++@CODIGO+PRE-AUTORIZACAO:+30307+++++++++@CARTAO:+xxxxxxxxxxxx9994++++++++++++++@+++++RECONHECO+E+PAGAREI+A+DIVIDA+++++@++++++++++AQUI+REPRESENTADA+++++++++++@@@+++++____________________________+++++@@', $response->getMessage());
+        $this->assertSame('xxxxxxxxxxxx9994', $response->getCard());
+        $this->assertSame('987654321', $response->getTransactionReference());
+        $this->assertSame('012345', $response->getNumAutor());
+        $this->assertSame(1234.56, $response->getAmount());
     }
 
     public function testCaptureSuccess_Installments()
@@ -175,8 +178,11 @@ class KomerciWSGatewayTest extends GatewayTestCase
         // Validate Response
         $this->assertTrue($response->isSuccessful());
         $this->assertSame('0', $response->getCode());
-        $this->assertEmpty($response->getTransactionReference());
-        $this->assertSame('Sucesso', $response->getMessage());
+        $this->assertSame('F+++++++++++++++++REDE+++++++++++++++++@++++CONFIRMACAO+DE+PRE-AUTORIZACAO++++@COMPR:987654321++++VALOR:+++++1.234,56@ESTAB:999999999+NOME+ESTAB++++++++++++@20.02.16-08:36:01+TERM:RO999999/999999@AUTORIZACAO+EMISSOR:+012345+++++++++++@CODIGO+PRE-AUTORIZACAO:+30307+++++++++@CARTAO:+xxxxxxxxxxxx9994++++++++++++++@+++++RECONHECO+E+PAGAREI+A+DIVIDA+++++@++++++++++AQUI+REPRESENTADA+++++++++++@@@+++++____________________________+++++@@', $response->getMessage());
+        $this->assertSame('987654321', $response->getTransactionReference());
+        $this->assertSame('xxxxxxxxxxxx9994', $response->getCard());
+        $this->assertSame('012345', $response->getNumAutor());
+        $this->assertSame(1234.56, $response->getAmount());
     }
 
     public function testCaptureFailure()

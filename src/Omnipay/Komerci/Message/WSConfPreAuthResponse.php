@@ -34,4 +34,34 @@ class WSConfPreAuthResponse extends AbstractResponse
     {
         return isset($this->data['MSGRET']) ? $this->data['MSGRET'] : 'Unknown';
     }
+
+    public function getTransactionReference()
+    {
+        $result = [];
+        preg_match('/@COMPR:(?<res>\d*?)\+*?V/', $this->getMessage(), $result);
+        return isset($result['res']) ? $result['res'] : '';
+    }
+
+    public function getNumAutor()
+    {
+        $result = [];
+        preg_match('/@AUTORIZACAO\+EMISSOR:\+(?<res>\d*?)\+*?@/', $this->getMessage(), $result);
+        return isset($result['res']) ? $result['res'] : '';
+    }
+
+    public function getCard()
+    {
+        $result = [];
+        preg_match('/@CARTAO:\+(?<res>\w*?)\+*?@/', $this->getMessage(), $result);
+        return isset($result['res']) ? $result['res'] : '';
+    }
+
+    public function getAmount()
+    {
+        $result = [];
+        preg_match('/\+VALOR:\+*?(?<int>[\d\.]*?),(?<dec>\d*?)@/', $this->getMessage(), $result);
+        return isset($result['int']) ? floatval(str_replace('.', '', $result['int']) . '.' . $result['dec']) : null;
+    }
+
+
 }
