@@ -35,6 +35,11 @@ class WSConfPreAuthResponse extends AbstractResponse
         return isset($this->data['MSGRET']) ? $this->data['MSGRET'] : 'Unknown';
     }
 
+    public function getSalesSlip($delimeter = "\n", $begin = '', $end = '')
+    {
+        return $begin . str_replace('@', $delimeter, urldecode(substr($this->getMessage(), 1))) . $end;
+    }
+
     public function getTransactionReference()
     {
         $result = [];
