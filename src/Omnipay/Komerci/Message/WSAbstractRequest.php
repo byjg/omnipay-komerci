@@ -2,15 +2,13 @@
 
 namespace Omnipay\Komerci\Message;
 
-use Omnipay\Common\Message\AbstractRequest;
+use Omnipay\Komerci\BaseRequest;
 
 /**
  * Komerci Authorize Request
  */
-abstract class WSAbstractRequest extends AbstractRequest
+abstract class WSAbstractRequest extends BaseRequest
 {
-    use \Omnipay\Komerci\TraitRequest;
-
     public function getInstallments()
     {
         return $this->getParameter('installments');

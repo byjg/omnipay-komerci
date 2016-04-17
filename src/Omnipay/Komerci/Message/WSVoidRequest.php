@@ -7,8 +7,6 @@ namespace Omnipay\Komerci\Message;
  */
 class WSVoidRequest extends WSAbstractRequest
 {
-    use \Omnipay\Komerci\TraitRequest;
-
     public function getPreAuth()
     {
         return $this->getParameter('preauth');

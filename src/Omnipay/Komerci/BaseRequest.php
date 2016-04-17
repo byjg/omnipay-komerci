@@ -2,10 +2,12 @@
 
 namespace Omnipay\Komerci;
 
+use Omnipay\Common\Message\AbstractRequest;
+
 /**
  * Komerci Authorize Request
  */
-trait TraitRequest
+abstract class BaseRequest extends AbstractRequest
 {
     protected $endpoint = 'https://ecommerce.userede.com.br/pos_virtual/wskomerci/cap.asmx/';
     protected $endpointTest = 'https://ecommerce.userede.com.br/pos_virtual/wskomerci/cap_teste.asmx/';
