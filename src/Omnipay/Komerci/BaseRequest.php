@@ -90,7 +90,9 @@ abstract class BaseRequest extends AbstractRequest
 
     public function getFormattedDate()
     {
-        return date('Ymd', strtotime($this->getParameter('date')));
+        return $this->getParameter('date')
+            ? date('Ymd', strtotime(str_replace('/', '-', $this->getParameter('date'))))
+            : date('Ymd');
     }
 
     public function setDate($value)
