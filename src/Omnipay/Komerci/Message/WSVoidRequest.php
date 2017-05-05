@@ -16,13 +16,25 @@ class WSVoidRequest extends WSAbstractRequest
     {
         return $this->setParameter('preauth', $value);
     }
-    
+
+    public function getConfPreAuth()
+    {
+        return $this->getParameter('confpreauth');
+    }
+
+    public function setConfPreAuth($value)
+    {
+        return $this->setParameter('confpreauth', $value);
+    }
+
     public function getData()
     {
         $this->validate('apikey', 'amount', 'transactionReference', 'numautor', 'username', 'password');
 
         if ($this->getPreAuth()) {
             return $this->getVoidPreAuthData();
+        } else if ($this->getConfPreAuth()) {
+            return $this->getVoidConfPreAuthData();
         } else {
             return $this->getVoidPurchaseData();
         }
@@ -47,10 +59,18 @@ class WSVoidRequest extends WSAbstractRequest
     {
         $data = $this->getVoidPurchaseData();
 
-        if ($this->getTestMode()) {
-            $data['Distribuidor'] = '';
-        }
-        $data['Data'] = date('Ymd');
+        $data['Distribuidor'] = '';
+        $data['Data'] = $this->getFormattedDate();
+
+        return $data;
+    }
+
+    protected function getVoidConfPreAuthData()
+    {
+        $data = $this->getVoidPurchaseData();
+
+        $data['Parcelas'] = $this->getFormattedInstallments();
+        $data['Data'] = $this->getFormattedDate();
 
         return $data;
     }
@@ -58,6 +78,8 @@ class WSVoidRequest extends WSAbstractRequest
     public function sendData($data)
     {
         if ($this->getPreAuth()) {
+            $httpResponse = $this->prepareSendData($data, 'VoidPreAuthorization');
+        } else if ($this->getConfPreAuth()) {
             $httpResponse = $this->prepareSendData($data, 'VoidConfPreAuthorization');
         } else {
             $httpResponse = $this->prepareSendData($data, 'VoidTransaction');
