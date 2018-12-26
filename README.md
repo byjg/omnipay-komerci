@@ -12,7 +12,7 @@
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
 processing library for PHP 5.3+. 
 
-## Installation
+# Installation
 
 Omnipay is installed via [Composer](http://getcomposer.org/). To install, simply add it
 to your `composer.json` file:
@@ -30,7 +30,7 @@ And run composer to update your dependencies:
     $ curl -s http://getcomposer.org/installer | php
     $ php composer.phar update
 
-## Basic Usage
+# Basic Usage
 
 The following gateways are provided by this package:
 
@@ -80,7 +80,7 @@ Implemented methods
 * purchse
 * void
 
-## Support
+# Support
 
 If you are having general issues with Omnipay, we suggest posting on
 [Stack Overflow](http://stackoverflow.com/). Be sure to add the
@@ -92,3 +92,4 @@ you can subscribe to.
 
 If you believe you have found a bug, please report it using the [GitHub issue tracker](https://github.com/thephpleague/omnipay-dummy/issues),
 or better yet, fork the library and submit a pull request.
+
