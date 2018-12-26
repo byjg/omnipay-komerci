@@ -17,7 +17,7 @@ class WSConfPreAuthRequest extends WSAbstractRequest
             'Distribuidor' => '',
             'Total' => sprintf("%.2F", round($this->getAmount() * 100) / 100),
             'Parcelas' => $this->getFormattedInstallments(),
-            'Data' => date('Ymd'),
+            'Data' => $this->getFormattedDate(),
             'NumAutor' => $this->getNumAutor(),
             'NumCv' => $this->getTransactionReference(),
             'Concentrador' => '',

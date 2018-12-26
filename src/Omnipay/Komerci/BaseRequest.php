@@ -83,6 +83,23 @@ abstract class BaseRequest extends AbstractRequest
         return $this->setParameter('numautor', $value);
     }
 
+    public function getDate()
+    {
+        return $this->getParameter('date');
+    }
+
+    public function getFormattedDate()
+    {
+        return $this->getParameter('date')
+            ? date('Ymd', strtotime(str_replace('/', '-', $this->getParameter('date'))))
+            : date('Ymd');
+    }
+
+    public function setDate($value)
+    {
+        return $this->setParameter('date', $value);
+    }
+
     /**
      *
      * @param type $data
